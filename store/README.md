@@ -1,10 +1,9 @@
-# STORE
+## Dashboard par Eliott CLAVIER et Julien BOSSARD
 
-**This directory is not required, you can delete it if you don't want to use it.**
+Dashboard en NuxtJS / Vuetify contenant un enregistrement / connexion utilisateur ainsi qu'un dashboard affichant les informations utilisateurs et permettant la déconnexion et la suppression de compte; le tout géré par des middlewares et un système de cookies.
 
-This directory contains your Vuex Store files.
-Vuex Store option is implemented in the Nuxt.js framework.
+### Membres du groupe
 
-Creating a file in this directory automatically activates the option in the framework.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/guide/vuex-store).
+Ce dashboard a été réalisé par :
+- CLAVIER Eliott @EliottClavier
+- BOSSARD Julien @jbbsd
