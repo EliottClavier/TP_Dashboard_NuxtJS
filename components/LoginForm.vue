@@ -2,6 +2,9 @@
   <v-card elevation="2">
     <v-card-title>Se connecter</v-card-title>
     <v-card-text>
+      <v-alert type="error" v-if="alert">
+        Identifiant ou mot de passe invalide
+      </v-alert>
       <v-form ref="loginForm">
         <v-text-field
           v-model="name"
@@ -40,6 +43,7 @@ export default {
   data: () => ({
     users: [],
     valid: true,
+    alert: false,
     name: '',
     password: '',
   }),
@@ -56,6 +60,11 @@ export default {
           name: this.name,
         });
         this.$router.push(`/${this.$store.state.users[this.$store.state.authenticated].name}`)
+      } else {
+        this.alert = true;
+        setTimeout(() => {
+          this.alert = false;
+        }, 3000)
       }
     },
     resetValidation() {
