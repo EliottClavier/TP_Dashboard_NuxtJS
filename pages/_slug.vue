@@ -18,9 +18,11 @@
                     Se déconnecter
                 </v-btn>
                 <v-row>
-                <v-btn class="ma-2" outlined color="error">
+                    <v-col cols="6">
+                <v-btn class="mt-4" outlined color="error">
                     Supprimer son compte
                 </v-btn>
+                    </v-col>
                 </v-row>
             </v-col>
         </v-row>
