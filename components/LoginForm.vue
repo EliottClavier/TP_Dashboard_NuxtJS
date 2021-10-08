@@ -44,16 +44,13 @@ export default {
     password: '',
   }),
   mounted() {
-    this.$store.dispatch(ACTIONS.INIT)
-    this.users = this.$store.state.users
+    this.$store.dispatch(ACTIONS.INIT);
+    this.users = this.$store.state.users;
   },
   methods: {
     validate() {
       this.valid = this.$refs.loginForm.validate();
-      this.valid = this.users && this.users.some((u) => {
-        console.log(u)
-        return u.name === this.name && u.password === this.password
-      });
+      this.valid = this.users && this.users.some((u) => u.name === this.name && u.password === this.password);
       if (this.valid) {
         this.$store.dispatch(ACTIONS.LOGIN_USER_METHOD, {
           name: this.name,

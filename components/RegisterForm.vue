@@ -50,10 +50,12 @@
 </template>
 
 <script>
+import {ACTIONS} from "~/store";
+
 export default {
   name: "RegisterForm",
   data: () => ({
-    users: [{name: 'Eliott', mail: 'eliott.clavier@gmail.com', password: '1234'}],
+    users: [],
     valid: true,
     name: '',
     mail: '',
@@ -73,6 +75,10 @@ export default {
       v => !!v || "Le champ Confirmer le mot de passe est obligatoire",
     ]
   }),
+  mounted() {
+    this.$store.dispatch(ACTIONS.INIT);
+    this.users = this.$store.state.users;
+  },
   methods: {
     passwordConfirmationRule() {
       return (this.password === this.confirmedPassword) || "Les champs mots de passe doivent être similaires"
@@ -86,7 +92,7 @@ export default {
     validate() {
       this.valid = this.$refs.registerForm.validate();
       if (this.valid) {
-        console.log(this.$refs.registerForm)
+        this.$store.dispatch(ACTIONS.ADD_USER_METHOD, { name: this.name, password: this.password, mail: this.mail });
       }
     },
     resetValidation() {
