@@ -2,17 +2,28 @@
   <v-card elevation="2">
     <v-card-title>Se connecter</v-card-title>
     <v-card-text>
-      <v-form>
+      <v-form ref="loginForm">
         <v-text-field
           v-model="name"
           label="Nom d'utilisateur"
           required
+          @change="resetValidation"
         ></v-text-field>
         <v-text-field
-          v-model="name"
+          type="password"
+          v-model="password"
           label="Mot de passe"
           required
+          @change="resetValidation"
         ></v-text-field>
+        <v-btn
+          :disabled="!valid"
+          color="success"
+          class="mr-4"
+          @click="validate"
+        >
+          Envoyer
+        </v-btn>
       </v-form>
     </v-card-text>
     <v-card-subtitle>
@@ -22,8 +33,38 @@
 </template>
 
 <script>
+import {ACTIONS} from "~/store";
+
 export default {
-  name: "LoginForm"
+  name: "LoginForm",
+  data: () => ({
+    users: [],
+    valid: true,
+    name: '',
+    password: '',
+  }),
+  mounted() {
+    this.$store.dispatch(ACTIONS.INIT)
+    this.users = this.$store.state.users
+  },
+  methods: {
+    validate() {
+      this.valid = this.$refs.loginForm.validate();
+      this.valid = this.users && this.users.some((u) => {
+        console.log(u)
+        return u.name === this.name && u.password === this.password
+      });
+      if (this.valid) {
+        this.$store.dispatch(ACTIONS.LOGIN_USER_METHOD, {
+          name: this.name,
+        });
+      }
+    },
+    resetValidation() {
+      this.$refs.loginForm.resetValidation();
+      this.valid = true;
+    },
+  }
 }
 </script>
 
