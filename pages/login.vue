@@ -11,7 +11,9 @@ export default {
   components: {LoginForm},
   middleware: 'authenticated',
   mounted() {
-    (this.$store.state.authenticated || this.$store.state.authenticated === 0) && (this.$router.push('/dashboard'))
+    if (this.$store.state.authenticated || this.$store.state.authenticated === 0) {
+      this.$router.push(`/${this.$store.state.users[this.$store.state.authenticated].name}`)
+    }
   }
 }
 </script>
