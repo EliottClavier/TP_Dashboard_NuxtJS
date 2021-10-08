@@ -78,7 +78,6 @@ export default {
   mounted() {
     this.$store.dispatch(ACTIONS.INIT);
     this.users = this.$store.state.users;
-    console.log(this.users)
   },
   methods: {
     passwordConfirmationRule() {
