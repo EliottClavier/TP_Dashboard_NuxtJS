@@ -9,15 +9,6 @@ import RegisterForm from "~/components/RegisterForm";
 export default {
   name: "register",
   components: {RegisterForm},
-  middleware: 'authenticated',
-  mounted() {
-    if (this.$store.state.authenticated || this.$store.state.authenticated === 0) {
-       this.$router.push(`/${this.$store.state.users[this.$store.state.authenticated].name}`)
-    }
-  }
+  middleware: ['authenticated'],
 }
 </script>
-
-<style scoped>
-
-</style>

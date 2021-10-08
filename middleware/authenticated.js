@@ -1,5 +1,6 @@
-export default function ({ store, redirect }) {
-  if (store.state.authenticated || store.state.authenticated === 0) {
-    return redirect(`/${store.state.users[store.state.authenticated].name}`)
+export default function ({store, redirect, app}) {
+  const authenticated = app.$cookies.get('authenticated')
+  if (authenticated || authenticated === 0) {
+    return redirect('/dashboard')
   }
 }

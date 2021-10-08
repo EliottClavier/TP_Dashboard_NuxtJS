@@ -92,8 +92,15 @@ export default {
     validate() {
       this.valid = this.$refs.registerForm.validate();
       if (this.valid) {
-        this.$store.dispatch(ACTIONS.ADD_USER_METHOD, { name: this.name, password: this.password, mail: this.mail });
-        this.$router.push(`/${this.$store.state.users[this.$store.state.authenticated].name}`)
+        this.$store.dispatch(ACTIONS.ADD_USER_METHOD, { name: this.name, password: this.password, mail: this.mail }).then(
+          () => {
+            this.$cookies.set('authenticated', this.$store.state.authenticated, {
+              path: '/',
+              maxAge: 60 * 60 * 24 * 7
+            });
+            this.$router.push('/dashboard');
+          }
+        );
       }
     },
     resetValidation() {

@@ -34,20 +34,21 @@ export default {
     user: {},
   }),
   mounted() {
-    (!this.$store.state.authenticated) && (this.$router.push('/login'))
     this.$store.dispatch(ACTIONS.INIT);
     this.user = this.$store.state.users[this.$store.state.authenticated];
   },
   methods: {
     logout() {
       this.$store.dispatch(ACTIONS.LOGOUT_USER_METHOD);
-      this.$router.replace('/login');
+      this.$cookies.remove('authenticated');
+      this.$router.push('/login');
     },
     deleteAccount() {
       this.$store.dispatch(ACTIONS.REMOVE_USER_METHOD);
-      this.$router.replace('/register');
+      this.$cookies.remove('authenticated');
+      this.$router.push('/register');
     },
-    middleware: 'logged',
-  }
+  },
+  middleware: ['logged'],
 }
 </script>

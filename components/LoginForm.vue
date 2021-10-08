@@ -58,8 +58,16 @@ export default {
       if (this.valid) {
         this.$store.dispatch(ACTIONS.LOGIN_USER_METHOD, {
           name: this.name,
-        });
-        this.$router.push(`/${this.$store.state.users[this.$store.state.authenticated].name}`)
+        }).then(
+          () => {
+            this.$cookies.set('authenticated', this.$store.state.authenticated, {
+              path: '/',
+              maxAge: 60 * 60 * 24 * 7
+            });
+            this.$router.push('/dashboard');
+          }
+        );
+
       } else {
         this.alert = true;
         setTimeout(() => {
