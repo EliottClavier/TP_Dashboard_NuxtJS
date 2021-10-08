@@ -8,7 +8,8 @@
 import LoginForm from "~/components/LoginForm";
 export default {
   name: "login",
-  components: {LoginForm}
+  components: {LoginForm},
+  middleware: 'authenticated',
 }
 </script>
 

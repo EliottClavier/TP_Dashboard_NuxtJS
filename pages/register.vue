@@ -8,7 +8,8 @@
 import RegisterForm from "~/components/RegisterForm";
 export default {
   name: "register",
-  components: {RegisterForm}
+  components: {RegisterForm},
+  middleware: 'authenticated',
 }
 </script>
 
