@@ -1,5 +1,5 @@
 export default function ({ store, redirect }) {
   if (store.state.authenticated || store.state.authenticated === 0) {
-    return redirect('/dashboard')
+    return redirect(`/${store.state.users[store.state.authenticated].name}`)
   }
 }

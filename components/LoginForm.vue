@@ -55,7 +55,7 @@ export default {
         this.$store.dispatch(ACTIONS.LOGIN_USER_METHOD, {
           name: this.name,
         });
-        this.$router.replace("/dashboard")
+        this.$router.push(`/${this.$store.state.users[this.$store.state.authenticated].name}`)
       }
     },
     resetValidation() {

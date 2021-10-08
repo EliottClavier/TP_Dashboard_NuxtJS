@@ -93,7 +93,7 @@ export default {
       this.valid = this.$refs.registerForm.validate();
       if (this.valid) {
         this.$store.dispatch(ACTIONS.ADD_USER_METHOD, { name: this.name, password: this.password, mail: this.mail });
-        this.$router.replace("/dashboard");
+        this.$router.push(`/${this.$store.state.users[this.$store.state.authenticated].name}`)
       }
     },
     resetValidation() {
