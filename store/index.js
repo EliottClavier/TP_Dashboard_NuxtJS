@@ -4,7 +4,6 @@ export const ACTIONS = {
   REMOVE_USER_METHOD: 'removeUser',
   LOGIN_USER_METHOD: 'loginUser',
   LOGOUT_USER_METHOD: 'logoutUser',
-  GET_USERS_METHOD: 'getUsers',
 }
 
 export const state = () => ({
@@ -47,9 +46,6 @@ export const mutations = {
     setLocalStorageArray('users', state.users);
     setLocalStorageString('authenticated', state.authenticated);
   },
-  GET_USERS: (state) => {
-    return state.users;
-  }
 }
 
 export const actions = {
@@ -67,8 +63,5 @@ export const actions = {
   },
   logoutUser({commit}, data) {
     commit('LOGOUT_USER', data);
-  },
-  getUsers({commit}) {
-    commit('GET_USERS');
   },
 }
