@@ -3,6 +3,8 @@
 
 <script>
 export default {
-  middleware: 'redirect'
+  mounted() {
+    this.$router.push('/login');
+  }
 }
 </script>

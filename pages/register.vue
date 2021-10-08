@@ -10,6 +10,9 @@ export default {
   name: "register",
   components: {RegisterForm},
   middleware: 'authenticated',
+  mounted() {
+    (this.$store.state.authenticated || this.$store.state.authenticated === 0) && (this.$router.push('/dashboard'))
+  }
 }
 </script>
 

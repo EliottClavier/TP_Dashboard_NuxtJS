@@ -23,7 +23,7 @@ export const setLocalStorageArray = (key, array) => {
 export const mutations = {
   INIT: (state) => {
     state.users = JSON.parse(localStorage.getItem("users") || "[]");
-    state.authenticated = localStorage.getItem("authenticated");
+    state.authenticated = localStorage.getItem("authenticated") !== 'null' ? parseInt(localStorage.getItem("authenticated")) : null;
   },
   ADD_USER: (state, data) => {
     state.users.push(data);
@@ -42,7 +42,7 @@ export const mutations = {
     setLocalStorageArray('users', state.users);
     setLocalStorageString('authenticated', state.authenticated);
   },
-  LOGOUT_USER: (state, data) => {
+  LOGOUT_USER: (state) => {
     state.authenticated = null;
     setLocalStorageArray('users', state.users);
     setLocalStorageString('authenticated', state.authenticated);
