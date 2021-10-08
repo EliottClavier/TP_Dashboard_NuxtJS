@@ -9,7 +9,12 @@ export const ACTIONS = {
 
 export const state = () => ({
   users: [],
+  authenticated: null,
 })
+
+export const setLocalStorageString = (key, string) => {
+  localStorage.setItem(key, string);
+}
 
 export const setLocalStorageArray = (key, array) => {
   localStorage.setItem(key, JSON.stringify(array));
@@ -18,25 +23,29 @@ export const setLocalStorageArray = (key, array) => {
 export const mutations = {
   INIT: (state) => {
     state.users = JSON.parse(localStorage.getItem("users") || "[]");
+    state.authenticated = localStorage.getItem("authenticated");
   },
   ADD_USER: (state, data) => {
     state.users.push(data);
+    state.authenticated = state.users.length - 1;
     setLocalStorageArray('users', state.users);
+    setLocalStorageString('authenticated', state.authenticated);
   },
   REMOVE_USER: (state, data) => {
-    let user = state.users.findIndex((u) => u.name === data.name);
-    state.users.splice(user, 1);
+    state.users.splice(state.authenticated, 1);
+    state.authenticated = null;
     setLocalStorageArray('users', state.users);
+    setLocalStorageString('authenticated', state.authenticated);
   },
   LOGIN_USER: (state, data) => {
-    let user = state.users.findIndex((u) => u.name === data.name);
-    state.users[user].connected = true;
+    state.authenticated = state.users.findIndex((u) => u.name === data.name);
     setLocalStorageArray('users', state.users);
+    setLocalStorageString('authenticated', state.authenticated);
   },
   LOGOUT_USER: (state, data) => {
-    let user = state.users.findIndex((u) => u.name === data.name);
-    state.users[user].connected = false;
+    state.authenticated = null;
     setLocalStorageArray('users', state.users);
+    setLocalStorageString('authenticated', state.authenticated);
   },
   GET_USERS: (state) => {
     return state.users;
